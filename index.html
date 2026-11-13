@@ -2,8 +2,18 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
 <title>WindowsiOS · iPad 模拟运行</title>
+<script>
+(function(){
+  try{
+    var coarse=matchMedia('(pointer:coarse)').matches;
+    var ua=/iPhone|iPad|iPod|Android|Mobile/i.test(navigator.userAgent);
+    var narrow=Math.min(screen.width,screen.height)<900||window.innerWidth<900;
+    if(coarse||ua||narrow)document.documentElement.classList.add('lite');
+  }catch(e){}
+})();
+</script>
 <style>
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -326,6 +336,27 @@ input[type=range]{width:100%;accent-color:#4cc2ff;margin:3px 0 4px}
 .power:hover{background:rgba(255,255,255,.1);color:#fff}
 .power svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round}
 .off span{font-size:11px;color:#5f7186;letter-spacing:.4px}
+
+/* lite mode: mobile / low-power WebKit */
+html.lite .bloom{filter:none;opacity:.82}
+html.lite .ring{filter:none;opacity:.7}
+html.lite .glare{display:none}
+html.lite .device{box-shadow:0 18px 46px rgba(0,0,0,.72),0 0 0 1px rgba(255,255,255,.08)}
+html.lite .screen,html.lite .desktop{isolation:auto}
+html.lite .dicon svg{filter:none}
+html.lite .taskbar,html.lite .start,html.lite .ctx,html.lite .host-chip,html.lite .host-panel,
+html.lite .toast,html.lite .jit,html.lite .power-menu{
+  -webkit-backdrop-filter:none;backdrop-filter:none}
+html.lite .taskbar{background:rgba(24,26,31,.97);box-shadow:0 6px 18px rgba(0,0,0,.4)}
+html.lite .start{background:rgba(31,32,37,.99)}
+html.lite .ctx{background:rgba(34,36,41,.99)}
+html.lite .host-chip{background:rgba(18,20,24,.96)}
+html.lite .host-panel{background:rgba(25,27,32,.99);box-shadow:0 14px 38px rgba(0,0,0,.55)}
+html.lite .toast{background:rgba(38,40,46,.99)}
+html.lite .jit{background:rgba(3,6,10,.9)}
+html.lite .win,html.lite .win.focus{box-shadow:0 10px 26px rgba(0,0,0,.55)}
+html.lite .start,html.lite .jit-card{box-shadow:0 16px 40px rgba(0,0,0,.55)}
+html.lite body{overflow:hidden;touch-action:manipulation}
 </style>
 </head>
 <body>
